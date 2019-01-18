@@ -38,9 +38,9 @@ public class AlarmTask implements Runnable{
         intent.putExtra("NotificationId", requestCode);
         intent.putExtra("title", title);
         intent.putExtra("content", content);
-        PendingIntent pendingIntent = PendingIntent.getService(context, requestCode, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0);
 
         // Sets an alarm - note this alarm will be lost if the phone is turned off and on again
-        am.set(AlarmManager.RTC, date.getTimeInMillis(), pendingIntent);
+        am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, date.getTimeInMillis(), pendingIntent);
     }
 }

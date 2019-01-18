@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".broadcast.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,8 +24,24 @@
 
         </activity>
 
-        <service android:name=".ScheduleService" />
-        <service android:name=".NotifyService" />
+        <service android:name=".ScheduleService" android:permission="android.permission.BIND_JOB_SERVICE">
+
+        </service>
+        <service android:name=".NotifyService" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </service>
+
+
+        <service android:name=".broadcast.ScheduledService" android:permission="android.permission.BIND_JOB_SERVICE">
+
+        </service>
+        <receiver android:name=".broadcast.PollReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
